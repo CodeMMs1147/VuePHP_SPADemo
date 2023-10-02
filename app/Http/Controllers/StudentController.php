@@ -12,21 +12,20 @@ class StudentController extends Controller
         $this->student = new Student();
     }
 
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return $this->student->all();
-    }
+    }  
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        return $this->student->create($request->all());
     }
 
     /**
@@ -34,7 +33,7 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = $this->student->find($id);
     }
 
     /**
@@ -42,7 +41,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = $this->student->find($id);
+        $student->update($request->all());
+        return $student;
     }
 
     /**
@@ -50,6 +51,7 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = $this->student->find($id);
+        return $student->delete();
     }
 }
